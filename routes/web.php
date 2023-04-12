@@ -21,33 +21,39 @@ Route::get('/', function () {
 
 Route::get('/Home', function (Request $request ) {
 
-    dd(
-        // "laravel9",
-        $request->path(), //path name
-        $request->is('/Home'),
+    // dd(
+    //     // "laravel9",
+    //     $request->path(), //path name
+    //     $request->is('/Home'),
+
+    //     $request->fullUrl(),
+    //     $request->host(),
+    //     $request->httpHost(),
+    //     $request->schemeAndHttpHost(),
 
 
-        $request->fullUrl(),
-        $request->host(),
-        $request->httpHost(),
-        $request->schemeAndHttpHost(),
+    //     $request->route('Home'),
+    //     $request->header('X-header-Name'),
+    //     $request->header('X-header-Name,default'),
+    //      $request->bearerToken(),
+
+    //      $request->ip(),
+    //      $request->prefers(['text/html','application/jason']),
+// );
 
 
-        $request->route('Home'),
-        $request->header('X-header-Name'),
-        $request->header('X-header-Name,default'),
-         $request->bearerToken(),
-
-
-         $request->ip(),
-         $request->prefers(['text/html','application/jason']),
-    );
-
+$data = [
+    'page_neme' => 'Home page',
+    'name' => 'laravel ',
+];
+return response($data)
+->header('content-Type','application/json')
+->cookie('My_Idcard','Mithun_Islam',3600);
 
 
 
-    return  view('Home',['page_name' => 'This is Home Page.',
-    'course' => 'Laravel']);
+    // return  view('Home',['page_name' => 'This is Home Page.',
+    // 'course' => 'Laravel']);
 })->name('Home');
 
 Route::get('/About/all-shopping', function ( ) {
