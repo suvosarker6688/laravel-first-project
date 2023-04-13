@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Psy\VersionUpdater\Downloader;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,18 +43,22 @@ Route::get('/Home', function (Request $request ) {
 // );
 
 
-$data = [
-    'page_neme' => 'Home page',
-    'name' => 'laravel ',
-];
-return response($data)
-->header('content-Type','application/json')
-->cookie('My_Idcard','Mithun_Islam',3600);
+// $data = [
+//     'page_neme' => 'Home page',
+//     'name' => 'laravel ',
+
+// ];
+// return response($data)
+// ->header('content-Type','application/json')
+// ->cookie('My_Idcard','Mithun_Islam',3600);
 
 
 
     // return  view('Home',['page_name' => 'This is Home Page.',
     // 'course' => 'Laravel']);
+
+
+    return redirect('/Contact/value');
 })->name('Home');
 
 Route::get('/About/all-shopping', function ( ) {
@@ -107,5 +112,10 @@ Route::get('/Services', function ( ) {
 })->name('Services');
 
 
+
+
+ Route::get('/mushroom/download',function(){
+return response()->download(public_path('mushroom.pdf'),'this is mushroom pdf book ,you can download it');
+ });
 
 
