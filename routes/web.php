@@ -16,117 +16,98 @@ use Psy\VersionUpdater\Downloader;
 */
 
 
-
-// Route::get('/Home', function (Request $request ) {
-
-//     // dd(
-//     //     // "laravel9",
-//     //     $request->path(), //path name
-//     //     $request->is('/Home'),
-
-//     //     $request->fullUrl(),
-//     //     $request->host(),
-//     //     $request->httpHost(),
-//     //     $request->schemeAndHttpHost(),
+Route::get('/', function (Request $request) {
 
 
-//     //     $request->route('Home'),
-//     //     $request->header('X-header-Name'),
-//     //     $request->header('X-header-Name,default'),
-//     //      $request->bearerToken(),
+    // dd(
+    //     //"Laravel 9"
+    //     $request->path(),  // path name
+    //     $request->is('/'), // 1 0r 0
 
-//     //      $request->ip(),
-//     //      $request->prefers(['text/html','application/jason']),
-// // );
+    //     $request->fullUrl(),
+    //     $request->host(),
+    //     $request->httpHost(),
+    //     $request->schemeAndHttpHost(),
 
+    //     $request->routeIs('home'),  // 1 or 0
+    //     $request->header('X-Header-Name'),
+    //     $request->header('X-Header-Name', 'default'),
+    //     $request->bearerToken(),  // Used in API building
 
-//     return redirect('/Contact/value');
-// })->name('Home');
+    //     $request->ip(),
+    //     $request->prefers(['text/html', 'application/json']),
+    // );
 
-// Route::get('/About/all-shopping', function ( ) {
-//     $About = 'This is About Page';
-//     $name = "Mithun";
-//     $age = '22';
-//      return  view('About',compact('name','age','About')
-//     );
-// })->name('About');
+    // $data = [
+    //     'page_name' => 'Home Page',
+    //     'name' => 'Larael 9 Course'
+    // ];
 
+    // return response($data)
+    // ->header('Content-Type', 'application/json')
+    // ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
 
-// Route::get('/Contact/value', function ( ) {
-// $page_name = 'This is Contact Page';
+    //dd($request->collect());
 
-// $products= [
-//     1 =>[
-//         'name' => 'Bag',
-//         'color' => 'Red',
-//         'price' => '1250',
-//     ],
-//     2 =>[
-//         'name' => 'Sunglass',
-//         'color' => 'Black',
-//         'price' => '550',
-//     ],
-//     3 =>[
-//         'name' => 'Mobile',
-//         'color' => 'Dark',
-//         'price' => '22550',
-//     ]
-// ];
-
-// $product_count = count( $products );
-
-//      return  view('Contact',
-//      compact('page_name',
-//      'product_count',
-//      'products'));
-// })->name('Contact');
+    return view('home', [
+        'page_name' => 'Home Page',
+        'name' => 'Larael 9 Course'
+    ]);
 
 
-// Route::get('/Services', function ( ) {
-//     $services = ['web_devlopment','Web_design','graphich_Design','SEO'];
-//      return  view('Services',compact('services'));
-// })->name('Services');
+})->name('home')->middleware('auth');
+
+Route::get('login', function(){
+    return "Login";
+})->name('login');
+
+Route::get('/about-us', function () {
+    return view('about', [
+        'page_name' => 'About Page',
+    ]);
+})->name('about');
+
+Route::get('/contact-page', function () {
+    $page_name = "Contact Page";
+    $products=[
+       1 => [
+        'name' => 'Bag',
+        'color' => 'Red',
+        'price' => '1200',
+       ],
+       2 => [
+        'name' => 'Sunglass',
+        'color' => 'Black',
+        'price' => '550',
+       ],
+       3 => [
+        'name' => 'BodySpray',
+        'color' => 'Blue',
+        'price' => '850',
+       ],
+    ];
+    $product_count = count($products);
+
+    return response()->json([
+        'products' => $products,
+        'product_count' => $product_count,
+    ], 200);
+    // return view('contact', compact(
+    //     'page_name',
+    //     'product_count',
+    //     'products'
+    // ));
+})->name('contact');
+
+Route::get('/service-page', function () {
+
+    $services = [
+        'Web Design',
+        'Web Development',
+        'App Development',
+        'Graphics Design',
+    ];
 
 
-//  Route::get('/mushroom/download',function(){
-// return response()->download(public_path('mushroom.pdf'),'this is mushroom pdf book ,you can download it');
-//  });
-
-
-
-
-
- Route::prefix('page')->name('laravel.')->group(function(){
-
-    Route::get('/Home',function(){
-        return view('Home');
-    })->name('Home');
-    Route::get('/About',function(){
-        return view('About');
-    })->name('About');
-    Route::get('/Contact',function(){
-        return view('Contact');
-    })->name('Contact');
-    Route::get('/Services',function(){
-        return view('Services');
-    })->name('Services');
-
- });
-
-
- Route::prefix('page')->name('mithun.')->group(function(){
-
-    Route::get('/Home',function(){
-        return view('Home');
-    })->name('Home');
-    Route::get('/About',function(){
-        return view('About');
-    })->name('About');
-    Route::get('/Contact',function(){
-        return view('Contact');
-    })->name('Contact');
-    Route::get('/Services',function(){
-        return view('Services');
-    })->name('Services');
-
- });
+    return view('service', compact('services'));
+})->name('service');
