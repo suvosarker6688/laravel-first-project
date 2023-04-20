@@ -111,3 +111,28 @@ Route::get('/service-page', function () {
 
     return view('service', compact('services'));
 })->name('service');
+
+
+Route::get('/send-me-details',function(Request $request){
+    $secrect_key = 2222;
+    $user_key = $request->user_key;
+
+    $data = [
+        'user_name' => 'Mithun Islam',
+        'designation' => 'Full Stack Devloper',
+        'mobile' => '01784997978',
+        'bank_acc' => '6438888277485854',
+    ];
+
+
+    if ($secrect_key == $user_key) {
+        return response()->json([
+            'user_info' => $data
+        ]);
+    }else
+    return response([
+        'message' => 'Provide valid secret key'
+    ],404);
+
+
+});
