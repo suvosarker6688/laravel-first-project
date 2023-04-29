@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\UserInfoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Psy\VersionUpdater\Downloader;
@@ -32,4 +33,4 @@ Route::get('/contact-page', [FrontController::class, 'contact'])->name('contact'
 Route::get('/service-page', [FrontController::class, 'service'])->name('service');
 
 
-Route::get('/send-me-details', [FrontController::class, 'sendMeDetails'])->name('sendmedetails');
+Route::get('/send-me-details', UserInfoController::class)->name('sendmedetails');
