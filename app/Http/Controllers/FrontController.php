@@ -9,7 +9,7 @@ class FrontController extends Controller
 {
     public function home()
     {
-        $users = User::all();
+        $users = User::where('created_at','<=',now())->get();
         return view('home', [
             'page_name' => 'Home Page',
             'name' => 'Larael 9 Course',
