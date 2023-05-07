@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
     public function home()
     {
+        $users = User::all();
         return view('home', [
             'page_name' => 'Home Page',
-            'name' => 'Larael 9 Course'
+            'name' => 'Larael 9 Course',
+            'users' => $users
         ]);
     }
 
@@ -62,5 +65,16 @@ class FrontController extends Controller
         return view('services', compact('services'));
     }
 
+
+public function userIndex()
+{
+
+
+    dd($users = User::all());
+
+    return view('Home',[
+        'users' => $users
+    ]);
+}
 
 }
